@@ -1,4 +1,5 @@
 import {
+  Error,
   FieldDescription,
   Label,
   Select,
@@ -18,77 +19,76 @@ import Chevron from 'payload/dist/admin/components/icons/Chevron'
 import { ClearIndicator } from 'payload/dist/admin/components/elements/ReactSelect/ClearIndicator/index'
 import { DocumentPermissions } from 'payload/dist/admin/components/utilities/DocumentInfo/types'
 import { CollectionPermission, FieldPermissions } from 'payload/dist/auth'
-import { Access, Condition, FieldAccess } from 'payload/types'
+import { Access, Condition, FieldAccess, FieldBase } from 'payload/types'
 import { Description } from 'payload/dist/admin/components/forms/FieldDescription/types'
+import GooglePlacesAutocompleteProps from 'react-google-places-autocomplete/build/types'
 
-type Admin = {
-  className?: string
-  components?: {
-    Cell?: React.ComponentType<any>
-    Field?: React.ComponentType<any>
-    Filter?: React.ComponentType<any>
-  }
-  /**
-   * You can programmatically show / hide fields based on what other fields are doing.
-   * This is also run on the server, to determine if the field should be validated.
-   */
-  condition?: Condition
-  description?: Description
-  disableBulkEdit?: boolean
-  disabled?: boolean
-  hidden?: boolean
-  position?: 'sidebar'
-  readOnly?: boolean
-  style?: any
-  width?: string
-}
-
-type JSONAdmin = Admin & {
-  components?: {
-    Error?: any
-    Label?: any
-  }
-  editorOptions?: any
-}
-
-export const AutoCompleteSelectField: (config: {
-  apiKey: string
-  name: string
-  point_path: string | null
-}) => React.FC<{ apiKey: string }> = config => {
+export const AutoCompleteSelectField: (
+  config: GooglePlacesAutocompleteProps & {
+    apiKey: string
+    name: string
+    point_path: string | null
+  },
+) => React.FC<{ apiKey: string }> = config => {
   const AutoCompleteSelect: React.FC<{
     path: string
     label: string
     required: boolean
-    admin?: JSONAdmin
+    admin?: FieldBase['admin'] & {
+      placeholder?: string
+    }
     name: string
   }> = prop => {
-    const { apiKey, point_path } = config || {}
-    const { name, path, label, required, admin } = prop
+    const {
+      apiKey,
+      point_path,
+      onLoadFailed = () => {},
+      apiOptions,
+      minLengthAutocomplete,
+      autocompletionRequest,
+      debounce = 300,
+      withSessionToken,
+    } = config || {}
+    const { name, path, label, required = false, admin } = prop
     const rawDatapath = path + '_rawData'
-    const { value, setValue } = useField({ path })
+    const { value, setValue, showError, errorMessage } = useField({ path })
     const { value: rawDataValue, setValue: rawDataSetValue } = useField({ path: rawDatapath })
     const { value: pointValue, setValue: pointSetValue } = useField({ path: point_path })
     const { description, position, disabled, hidden, readOnly } = admin || {}
 
-    const classes = ['react-select'].filter(Boolean).join(' ')
+    const classes = ['react-select', showError && 'react-select--error'].filter(Boolean).join(' ')
 
+    console.log(classes)
     if (!apiKey) {
       return 'Please enter a valid api key'
     }
 
+    console.log(prop)
+
     return (
-      <div className={'autocomplete_places__container'}>
+      <div className={`field-type select ${showError ? 'error' : ''}`}>
+        {errorMessage && <Error message={errorMessage} showError={showError} />}
         <Label htmlFor={path} label={label} required={required} />
         <GooglePlacesAutocomplete
           apiKey={apiKey}
+          apiOptions={apiOptions}
+          onLoadFailed={onLoadFailed}
+          minLengthAutocomplete={minLengthAutocomplete}
+          autocompletionRequest={autocompletionRequest}
+          debounce={debounce}
+          withSessionToken={withSessionToken}
           selectProps={{
+            required,
             className: classes,
             cacheOptions: true,
             classNamePrefix: 'rs',
             isClearable: true,
             isDisabled: readOnly,
+
             onChange: __value => {
+              if (__value === null) {
+                pointSetValue([])
+              }
               setValue(__value?.label)
               rawDataSetValue(__value)
               if (point_path != null && __value) {
@@ -104,6 +104,7 @@ export const AutoCompleteSelectField: (config: {
               DropdownIndicator: Chevron,
               ClearIndicator: ClearIndicator,
             },
+            placeholder: admin?.placeholder ?? 'Please Select...',
           }}
         />
         <FieldDescription

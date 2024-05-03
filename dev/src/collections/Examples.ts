@@ -10,40 +10,27 @@ const Examples: CollectionConfig = {
   },
   fields: [
     {
-      name: 'someField',
+      name: 'name',
       type: 'text',
     },
-    {
-      name: 'someField2',
-      type: 'select',
-      access: {
-        // create:() => false,
-        // read:() => false,
-        // update:() => false
-      },
-      options: [
-        {
-          label: 'Option 1',
-          value: 'option1',
-        },
-        {
-          label: 'Option 2',
-          value: 'option2',
-        },
-      ],
-    },
     ...googleMapAutoCompletePlaces({
-      apiKey: "<google maps API Key Goes Here>",
+      apiKey: "", //<google maps API Key Goes Here>
       name: 'google_location',
       label: 'Google Location',
       required: true,
+      hidden: true,
+      minLengthAutocomplete: 3,
+      autocompletionRequest:{},
+      debounce: 400,
+      apiOptions:{},
+      withSessionToken:true,
       admin:{
-        description: "Please enter a valid api key",
+        description: "Please pick a location",
         disabled: false,
         hidden: false,
         position: 'sidebar',
         readOnly:false,
-        
+        placeholder :"Please select a location",
       },
       access:{
         // create:() => false,
@@ -54,9 +41,8 @@ const Examples: CollectionConfig = {
         showFields: true,
         name: 'latlng',
         label: "location coordinates",
-
         admin:{
-        description: "hi",
+        description: "Auto populated location coordinates",
         disabled: false,
         hidden: false,
         position: 'sidebar',

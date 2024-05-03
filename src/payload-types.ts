@@ -7,7 +7,9 @@ import GooglePlacesAutocompleteProps from "react-google-places-autocomplete/buil
 export type GoogleMapsAutoCompleteField =  Omit<TextField, 'type' | "maxLength" | "minLength" | "hasMany" | "maxRows" | 'minRows' | 'admin'> & Omit<GooglePlacesAutocompleteProps,"apiKey"> &{
   latLng?: boolean | {showFields?: boolean, name: string, label?: string, admin?: FieldBase['admin'], access?:FieldBase['access']};
   apiKey: string;
-  admin?: FieldBase['admin']
+  admin?: FieldBase['admin'] &{
+    placeholder?:string
+  }
 }
 
 

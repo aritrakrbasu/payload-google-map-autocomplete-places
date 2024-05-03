@@ -24,6 +24,7 @@ export const googleMapAutoCompletePlaces = (incomingConfig:GoogleMapsAutoComplet
         name: config.name,
         type: 'text',
         label: config.label ?? config.name,
+        required: config.required ?? false,
         access:{
           ...config?.access
         },
@@ -35,6 +36,13 @@ export const googleMapAutoCompletePlaces = (incomingConfig:GoogleMapsAutoComplet
               apiKey: config.apiKey,
               name: config.name,
               point_path,
+              onLoadFailed : config?.onLoadFailed,
+              apiOptions : config?.apiOptions,
+              minLengthAutocomplete : config?.minLengthAutocomplete,
+              autocompletionRequest : config?.autocompletionRequest,
+              withSessionToken : config?.withSessionToken,
+              debounce : config?.debounce,
+              
             }),
 
           }
