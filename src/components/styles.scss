@@ -1,0 +1,13 @@
+@import '~payload/dist/admin/scss/vars';
+@import '~payload/dist/admin/scss/z-index';
+@import '~payload/dist/admin/scss/type';
+@import '~payload/dist/admin/scss/queries';
+@import '~payload/dist/admin/scss/resets';
+@import '~payload/dist/admin/components/elements/ReactSelect';
+
+
+
+.rs__placeholder , .rs__single-value 
+{
+    color: var(--theme-elevation-800) !important;
+}
