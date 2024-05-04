@@ -4,11 +4,11 @@
 > This plugin is currently under active development and still in an early stage.
 > Check the [roadmap](#roadmap) below in this readme for more details / upcoming features.
 
-<!-- <picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" src="./preview-dark.png" />
   <source media="(prefers-color-scheme: light)" src="./preview-light.png" />
   <img alt="Shows an image illustrating the payload-google-autocomplete-places plugin" src="./preview-dark.png">
-</picture> -->
+</picture>
 
 ## Installation
 
