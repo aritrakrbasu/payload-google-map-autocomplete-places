@@ -47,7 +47,7 @@ const Examples: CollectionConfig = {
         disabled: false,
         hidden: false,
         readOnly:true,
-        
+
       },
       access:{
         // create:() => false,
