@@ -12,7 +12,9 @@
     "plugin",
     "typescript"
   ],
-  "repository": "https://github.com/aritrakrbasu/payload-google-map-autocomplete-places.git",
+  "repository": {
+    "url":"git+https://github.com/aritrakrbasu/payload-google-map-autocomplete-places.git"
+  },
   "author": "Aritra Kr. Basu <aritrabasu71@gmail.com> (https://aritrakrbasu.github.io/)",
   "license": "MIT",
   "private": false,
