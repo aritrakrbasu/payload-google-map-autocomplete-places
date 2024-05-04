@@ -1,29 +1,34 @@
 {
-  "name": "payload-google-map-autocomplete-places",
-  "version": "0.0.0=1",
-  "homepage:": "https://payloadcms.com",
-  "repository": "git@github.com:payloadcms/payload-plugin-template.git",
-  "description": "Blank plugin template for Payload",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "name": "payload-google-autocomplete-places",
+  "description": "A Google Map Places Autocomplete Field for Payload CMS",
+  "version": "1.0.0",
   "keywords": [
+    "google maps",
+    "google maps autocomplete",
+    "autocomplete",
+    "places autocomplete",
     "payload",
     "cms",
     "plugin",
-    "typescript",
-    "react",
-    "template"
+    "typescript"
   ],
-  "scripts": {
-    "build": "tsc",
-    "test": "cd dev && yarn test",
-    "lint": "eslint src",
-    "lint:fix": "eslint --fix --ext .ts,.tsx src",
-    "clean": "rimraf dist && rimraf dev/yarn.lock",
-    "prepublishOnly": "yarn clean && yarn build && cd dev && yarn test"
-  },
-  "author": "dev@payloadcms.com",
+  "repository": "https://github.com/aritrakrbasu/payload-google-map-autocomplete-places.git",
+  "author": "Aritra Kr. Basu <aritrabasu71@gmail.com> (https://aritrakrbasu.github.io/)",
   "license": "MIT",
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/aritrakrbasu/payload-google-map-autocomplete-places/issues",
+    "email": "aritrabasu71@gmail.com"
+  },
+  "scripts": {
+  "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" dist/",
+  "build": "yarn copyfiles && yarn build:tsc",
+  "build:tsc": "tsc",
+  "clean": "rimraf dist && rimraf dev/yarn.lock",
+  "prepublishOnly": "yarn clean && yarn build"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "peerDependencies": {
     "payload": "^2.0.0"
   },
@@ -34,6 +39,7 @@
     "@types/jest": "^29.5.11",
     "@typescript-eslint/eslint-plugin": "5.12.1",
     "@typescript-eslint/parser": "5.12.1",
+    "copyfiles": "^2.4.1",
     "dotenv": "^8.2.0",
     "eslint": "^8.19.0",
     "eslint-config-airbnb-base": "^14.2.1",

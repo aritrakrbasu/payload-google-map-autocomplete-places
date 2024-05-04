@@ -1,5 +1,4 @@
 import { GoogleMapsAutoCompleteField } from './payload-types';
-// import { extendWebpackConfig } from './webpack'
 import { Field } from 'payload/types';
 import { AutoCompleteSelectField } from './components/AutoCompleteSelectField';
 
@@ -24,7 +23,7 @@ export const googleMapAutoCompletePlaces = (incomingConfig:GoogleMapsAutoComplet
         name: config.name,
         type: 'text',
         label: config.label ?? config.name,
-        required: config.required ?? false,
+        required: config.required ? config.required : false,
         access:{
           ...config?.access
         },
@@ -36,6 +35,9 @@ export const googleMapAutoCompletePlaces = (incomingConfig:GoogleMapsAutoComplet
               apiKey: config.apiKey,
               name: config.name,
               point_path,
+              path: config.name,
+              label: typeof config.label === 'string' ? config.label : config.name,
+              required: config.required ?config.required : false,
               onLoadFailed : config?.onLoadFailed,
               apiOptions : config?.apiOptions,
               minLengthAutocomplete : config?.minLengthAutocomplete,
@@ -70,15 +72,13 @@ export const googleMapAutoCompletePlaces = (incomingConfig:GoogleMapsAutoComplet
                   label: config.label ?? config.name +"(point)",
                   name: config.name + '_point',
                   type: 'point',
+                  required: config.required ?config.required : false,
                    access:{
                     ...config?.access
                   },
                   admin: {
-                    readOnly:true,
-                    description: config.admin?.description ?? "",
-                    disabled: config.admin?.disabled ?? false,
-                    hidden: config.admin?.hidden ?? false,
-                    position: config.admin?.position ?? '',
+                    ...config.admin,
+                    readOnly:config.admin?.readOnly ?? true,
                   }
                 })
               }
@@ -89,6 +89,7 @@ export const googleMapAutoCompletePlaces = (incomingConfig:GoogleMapsAutoComplet
                   label: config.latLng.label ?? config.name + "(point)",
                   name: config.latLng.name,
                   type: "point",
+                  required: config.latLng.required ?config.latLng.required: false,
                   access:{
                     ...config?.latLng?.access
                   },

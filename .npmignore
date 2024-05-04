@@ -1,0 +1,12 @@
+.idea
+tsconfig.json
+
+node_modules
+src/
+dev/
+
+.editorconfig
+.gitattributes
+.prettierrc.js
+.github
+yarn.lock

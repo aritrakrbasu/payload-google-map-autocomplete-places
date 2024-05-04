@@ -10,11 +10,12 @@ const Examples: CollectionConfig = {
   },
   fields: [
     {
+      required:true,
       name: 'name',
       type: 'text',
     },
     ...googleMapAutoCompletePlaces({
-      apiKey: "", //<google maps API Key Goes Here>
+      apiKey: "AIzaSyDFXM8R5p6Ay3K1sQf96DBhTBU60B1Jogc", //<google maps API Key Goes Here>
       name: 'google_location',
       label: 'Google Location',
       required: true,
@@ -41,18 +42,19 @@ const Examples: CollectionConfig = {
         showFields: true,
         name: 'latlng',
         label: "location coordinates",
+        required: true,
         admin:{
         description: "Auto populated location coordinates",
         disabled: false,
         hidden: false,
         position: 'sidebar',
-        readOnly:false,
+        readOnly:true,
         
       },
       access:{
-        create:() => false,
+        // create:() => false,
         // read:() => false,
-        update:() => false
+        // update:() => false
       },
       }
     })
