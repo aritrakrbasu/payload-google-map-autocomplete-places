@@ -29,7 +29,6 @@ const Examples: CollectionConfig = {
         description: "Please pick a location",
         disabled: false,
         hidden: false,
-        position: 'sidebar',
         readOnly:false,
         placeholder :"Please select a location",
       },
@@ -47,7 +46,6 @@ const Examples: CollectionConfig = {
         description: "Auto populated location coordinates",
         disabled: false,
         hidden: false,
-        position: 'sidebar',
         readOnly:true,
         
       },
