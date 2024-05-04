@@ -1,7 +1,7 @@
 {
   "name": "payload-google-autocomplete-places",
   "description": "A Google Map Places Autocomplete Field for Payload CMS",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "google maps",
     "google maps autocomplete",
