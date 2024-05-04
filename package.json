@@ -21,11 +21,11 @@
     "email": "aritrabasu71@gmail.com"
   },
   "scripts": {
-  "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" dist/",
-  "build": "yarn copyfiles && yarn build:tsc",
-  "build:tsc": "tsc",
-  "clean": "rimraf dist && rimraf dev/yarn.lock",
-  "prepublishOnly": "yarn clean && yarn build"
+    "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" dist/",
+    "build": "yarn copyfiles && yarn build:tsc",
+    "build:tsc": "tsc",
+    "clean": "rimraf dist && rimraf dev/yarn.lock",
+    "prepublishOnly": "yarn clean && yarn build"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
