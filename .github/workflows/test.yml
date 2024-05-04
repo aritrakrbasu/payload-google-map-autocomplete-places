@@ -13,8 +13,6 @@ jobs:
         with:
           node-version: "20"
       - run: npm ci --legacy-peer-deps
-      - name: Bump version
-        run: npm version patch
       - run: npm run build
       - uses: JS-DevTools/npm-publish@v3
         with:
