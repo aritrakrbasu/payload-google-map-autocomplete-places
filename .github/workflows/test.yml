@@ -7,11 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [14, 16, 18]
-
-    name: Node ${{ matrix.node }} sample
     steps:
       - run: npm install
       - uses: JS-DevTools/npm-publish@v1
